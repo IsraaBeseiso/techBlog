@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({ helpers });
+// const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: 'Super secret secret',
@@ -28,6 +28,13 @@ const sess = {
 };
 
 app.use(session(sess));
+const hbs = exphbs.create({
+  helpers: {
+    format_date: date => {
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    }
+  }
+});
 
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
