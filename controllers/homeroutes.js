@@ -17,7 +17,7 @@ router.get('/',async (req, res) => {
         const projects = projectData.map((project) => project.get({ plain: true }));
     
         // Pass serialized data and session flag into template
-        res.render('index', { 
+        res.render('projects', { 
           projects, 
           logged_in: req.session.logged_in 
         });

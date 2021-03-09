@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(routes)
 // Set up Handlebars.js engine with custom helpers
 // const hbs = exphbs.create({ helpers });
 
@@ -42,7 +42,7 @@ app.set('view engine', 'handlebars');
 
 
 
-app.use(routes);
+
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
