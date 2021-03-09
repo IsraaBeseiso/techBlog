@@ -15,6 +15,21 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, (req,res)=>{
+  Project.update(req.body, {
+    where:{
+      id: req.params.id
+    }
+  }).then(updated =>{
+    if(updated > 0){
+      res.status(200).end()
+    }else{
+      res.status(404).end()
+    }
+  }).catch(err=>{
+    res.status(500).end()  })
+})
+
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const projectData = await Project.destroy({
